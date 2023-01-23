@@ -59,7 +59,7 @@ function Header() {
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
-              size="large"
+              size="lange"
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
