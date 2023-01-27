@@ -5,13 +5,11 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-// import MenuIcon from '@mui/icons-material/Menu';
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-// import AdbIcon from '@mui/icons-material/Adb';
 
 import { createSvgIcon } from "@mui/material/utils";
 
@@ -20,18 +18,82 @@ const HomeIcon = createSvgIcon(
   "Home"
 );
 
-const pages = ["Главная", "Вы гость?", "Слово", "События", "Жизнь церкви"];
+// const pages = ["Главная", "Вы гость?", "Слово", "События", "Жизнь церкви"];
+
+const menu = [
+  {
+    key: 0,
+    label: "Главная1",
+    menu: [
+      {
+        key: 0,
+        label: "1",
+      },
+    ],
+  },
+  {
+    key: 1,
+    label: "Вы гость?",
+    menu: [
+      {
+        key: 0,
+        label: "1",
+      },
+      {
+        key: 1,
+        label: "2",
+      },
+    ],
+  },
+  {
+    key: 2,
+    label: "Слово",
+    menu: [
+      {
+        key: 0,
+        label: "1",
+      },
+    ],
+  },
+  {
+    key: 3,
+    label: "События",
+    menu: [
+      {
+        key: 0,
+        label: "1",
+      },
+    ],
+  },
+  {
+    key: 4,
+    label: "Жизнь церкви",
+    menu: [
+      {
+        key: 0,
+        label: "1",
+      },
+    ],
+  },
+];
 const settings = ["О нас", "Контакты", "Домашние группы"];
+const guest = ["С чего начать?", "Контакты", "О церкви"];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorHeaderUser, setAnchorHeaderUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
+  };
+
+  const handleOpenHeaderMenu = (event) => {
+    setAnchorHeaderUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
@@ -42,12 +104,14 @@ function Header() {
     setAnchorElUser(null);
   };
 
+  const handleCloseHeaderMenu = () => {
+    setAnchorHeaderUser(null);
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
-         
           <IconButton
             href="/"
             sx={{
@@ -65,9 +129,7 @@ function Header() {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
-            >
-              {/* <MenuIcon /> */}
-            </IconButton>
+            ></IconButton>
 
             <Menu
               id="menu-appbar"
@@ -87,43 +149,52 @@ function Header() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {menu.map((page) => (
+                <Button
+                  key={page.key}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  {page.label}
+                </Button>
+              ))}
+              {guest.map((guests) => (
+                <MenuItem key={guests} onClick={handleOpenUserMenu}>
+                  <Typography textAlign="center">{guests}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
 
-          {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
-
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
+            {menu.map((page) => (
+              <div key={page.key}>
+                <MenuItem onClick={handleOpenHeaderMenu}>
+                  <Typography textAlign="center">{page.label}</Typography>
+                </MenuItem>
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorHeaderUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorHeaderUser)}
+                  onClose={handleCloseHeaderMenu}
+                >
+                  {page.menu.map((setting) => (
+                    <MenuItem key={setting.key} onClick={handleCloseHeaderMenu}>
+                      <Typography textAlign="center">{setting.label}</Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </div>
             ))}
           </Box>
 

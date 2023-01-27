@@ -1,17 +1,10 @@
 import { useState } from "react";
 import Head from "next/head";
-import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
-import Button from "@mui/material/Button";
-import ButtonGroup from "@mui/material/ButtonGroup";
-import Checkboxes from "src/components/checkboxes";
-
-import Tooltip from "@mui/material/Tooltip";
-import Fade from "@mui/material/Fade";
-import Zoom from "@mui/material/Zoom";
-
-
+import CssBaseline from "@mui/material/CssBaseline";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,9 +19,17 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-       
-      <img src="/picture.png"/>
+      <main className={styles.main}>
+        <div>
+          <CssBaseline />
+          <Container fixed>
+            <Box sx={{ bgcolor: "#cfe8fc", height: "100vh" }}>
+              <img src="/picture.png" alt="Photo" />
+              <p>Hello word</p>
+              <button>like</button>
+            </Box>
+          </Container>
+        </div>
       </main>
     </>
   );
