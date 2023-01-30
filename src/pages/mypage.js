@@ -5,6 +5,10 @@ import styles from "@/styles/Home.module.css";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,8 +29,11 @@ export default function Home() {
           <Container fixed>
             <Box sx={{ bgcolor: "#cfe8fc", height: "100vh" }}>
               <img src="/picture.png" alt="Photo" />
+              <h1 style={{color: "red", backgroundColor: "yellow"}}> Olga </h1>
               <p>Hello word</p>
-              <button>like</button>
+              <a href="https://propokot.ru/" rel="noreferrer" target="_blank" class="btn btn-primary">
+              <button style={{color: "yellow", backgroundColor: "grey"}}>like</button>
+              </a>
             </Box>
           </Container>
         </div>
