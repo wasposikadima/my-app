@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -10,43 +10,41 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-
-const options2 = {
-  label: "Вы гость?",
-  menu: [
-    {
-      key: 0,
-      label: "1",
-      href: "",
-    },
-    {
-      key: 1,
-      label: "2",
-      href: "",
-    },
-  ],
-};
-
-// options.menu.map
+import MenuList from "@mui/material/MenuList";
+import Link from "next/link";
 
 function MenuHeader(props) {
-  const { options } = props;
-
   const [anchorNav, setAnchorNav] = React.useState(null);
 
+  function handleClick(href) {
+    navigate(href);
+    handleClose();
+  }
+
+  useEffect(() => {
+    console.log(props);
+  });
+
   const handleOpen = (event) => {
-    setAnchorHeaderUser(event.currentTarget);
+    setAnchorNav(event.currentTarget);
   };
 
   const handleClose = () => {
-    setAnchorElNav(null);
+    setAnchorNav(null);
   };
 
   return (
     <div>
-      <MenuItem onClick={handleOpen}>
-        <Typography textAlign="center">{options.label}</Typography>
-      </MenuItem>
+      <Button onClick={handleOpen}>
+        <Typography
+          sx={{
+            color: "white",
+            textAlign: "center",
+          }}
+        >
+          {props.label}
+        </Typography>
+      </Button>
       <Menu
         sx={{ mt: "45px" }}
         id="menu-appbar"
@@ -63,11 +61,15 @@ function MenuHeader(props) {
         open={Boolean(anchorNav)}
         onClose={handleClose}
       >
-        {options.menu.map((x) => (
-          <MenuItem key={x.key} onClick={handleClose}>
-            <Typography textAlign="center">{x.label}</Typography>
-          </MenuItem>
-        ))}
+        <MenuList>
+          {props?.options?.map((x) => (
+            <MenuItem>
+              <Link href={x.href} style={{ textDecoration: 'none', color: 'black' }}>
+                <Typography textAlign="center">{x.label}</Typography>
+              </Link>
+            </MenuItem>
+          ))}
+        </MenuList>
       </Menu>
     </div>
   );

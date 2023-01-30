@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -10,80 +10,31 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-
 import { createSvgIcon } from "@mui/material/utils";
+import MenuHeader from "./menu-header";
+import menu from "@/constants/menu";
 
 const HomeIcon = createSvgIcon(
   <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />,
   "Home"
 );
 
-// const pages = ["Главная", "Вы гость?", "Слово", "События", "Жизнь церкви"];
-
-// Переместить меню в отдельный файл и импортировать.
-const menu = [
-  {
-    key: 0,
-    label: "Главная1",
-    menu: [
-      {
-        key: 0,
-        label: "1",
-      },
-    ],
-  },
-  {
-    key: 1,
-    label: "Вы гость?",
-    menu: [
-      {
-        key: 0,
-        label: "1",
-      },
-      {
-        key: 1,
-        label: "2",
-      },
-    ],
-  },
-  {
-    key: 2,
-    label: "Слово",
-    menu: [
-      {
-        key: 0,
-        label: "1",
-      },
-    ],
-  },
-  {
-    key: 3,
-    label: "События",
-    menu: [
-      {
-        key: 0,
-        label: "1",
-      },
-    ],
-  },
-  {
-    key: 4,
-    label: "Жизнь церкви",
-    menu: [
-      {
-        key: 0,
-        label: "1",
-      },
-    ],
-  },
-];
 const settings = ["О нас", "Контакты", "Домашние группы"];
-const guest = ["С чего начать?", "Контакты", "О церкви"];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [anchorHeaderUser, setAnchorHeaderUser] = React.useState(null);
+
+  const [menuUI, setMenuUI] = React.useState([{id: 0, name: 'name0'}, {id: 1, name: 'name1'}]);
+
+  useEffect(() => {
+    // setMenuUI(menu);
+  });
+
+  const xxx = menu.map((x) =>
+    <MenuHeader key={x.key} label={x.label} options={x.options} />
+  )
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -122,82 +73,25 @@ function Header() {
             <HomeIcon />
           </IconButton>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="lange"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            ></IconButton>
+          {xxx}
 
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
+          {/* {menuUI.map(m => {
+              <MenuHeader key={m.key} label={m.label} options={m.options} />
+            })} */}
+
+          {/* <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            <IconButton
+              href="/"
               sx={{
-                display: { xs: "block", md: "none" },
+                color: "white",
               }}
             >
-              {menu.map((page) => (
-                <Button
-                  key={page.key}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
-                  {page.label}
-                </Button>
-              ))}
-              {guest.map((guests) => (
-                <MenuItem key={guests} onClick={handleOpenUserMenu}>
-                  <Typography textAlign="center">{guests}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {menu.map((page) => (
-              <div key={page.key}>
-                <MenuItem onClick={handleOpenHeaderMenu}>
-                  <Typography textAlign="center">{page.label}</Typography>
-                </MenuItem>
-                <Menu
-                  sx={{ mt: "45px" }}
-                  id="menu-appbar"
-                  anchorEl={anchorHeaderUser}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={Boolean(anchorHeaderUser)}
-                  onClose={handleCloseHeaderMenu}
-                >
-                  {page.menu.map((setting) => (
-                    <MenuItem key={setting.key} onClick={handleCloseHeaderMenu}>
-                      <Typography textAlign="center">{setting.label}</Typography>
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </div>
-            ))}
-          </Box>
+              <HomeIcon />
+            </IconButton>
+            {menu.map(m => {
+              <MenuHeader key={m.key} label={m.label} options={m.options} />
+            })}
+          </Box> */}
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
