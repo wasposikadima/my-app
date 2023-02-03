@@ -1,22 +1,14 @@
-import {useState} from "react";
+import { useState } from "react";
 import Head from "next/head";
-import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
-import Button from "@mui/material/Button";
-import ButtonGroup from "@mui/material/ButtonGroup";
-import Checkboxes from "src/components/checkboxes";
-
-
-import Tooltip from '@mui/material/Tooltip';
-import Fade from '@mui/material/Fade';
-import Zoom from '@mui/material/Zoom';
-
+import CssBaseline from "@mui/material/CssBaseline";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
-
+export default function MyPage() {
   const [count, setCount] = useState(0);
 
   return (
@@ -27,44 +19,20 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-       
-          <Button variant="contained" disableElevation>
-            Главная
-          </Button>
-
-          <ButtonGroup
-            variant="contained"
-            aria-label="outlined primary button group"
-          >
-            <Button onClick={() => { setCount(count + 1); }}>Plus</Button>
-            <Button onClick={() => { setCount(count - 1); }}>Minus</Button>
-            <Button>Three</Button>
-          </ButtonGroup>
-          <Checkboxes/>
-          {count}
-
-         
+      <main className={styles.main}>
         <div>
-      <Tooltip title="Add">
-        <Button>Главная</Button>
-      </Tooltip>
-      <Tooltip
-        TransitionComponent={Fade}
-        TransitionProps={{ timeout: 600 }}
-        title="Add"      >
-        <Button>Вы гость?</Button>
-      </Tooltip>
-      <Tooltip TransitionComponent={Zoom} title="Add">
-        <Button>Слово</Button>
-      </Tooltip>
-      <Tooltip TransitionComponent={Fade} title="Add">
-        <Button>События</Button>
-      </Tooltip>
-
-    </div>
-   
-
+          <CssBaseline />
+          <Container fixed>
+            <Box sx={{ bgcolor: "#cfe8fc", height: "100vh" }}>
+              <img src="/picture.png" alt="Photo" />
+              <h1 style={{color: "red", backgroundColor: "yellow"}}> Olga </h1>
+              <p>Hello word</p>
+              <a href="https://propokot.ru/" rel="noreferrer" target="_blank" class="btn btn-primary">
+              <button style={{color: "yellow", backgroundColor: "grey"}}>like</button>
+              </a>
+            </Box>
+          </Container>
+        </div>
       </main>
     </>
   );
