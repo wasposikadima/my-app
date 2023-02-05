@@ -6,7 +6,9 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 
+
 const inter = Inter({ subsets: ["latin"] });
+
 
 export default function MyPage() {
   const [count, setCount] = useState(0);
@@ -20,19 +22,20 @@ export default function MyPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <div>
+        <div >
           <CssBaseline />
-          <Container fixed>
-            <Box sx={{ bgcolor: "#cfe8fc", height: "100vh" }}>
-              <img src="/picture.png" alt="Photo" />
+          <Container fixed >
+            <Box sx={{height: "100vh", width: "40vw" }} className="contener-color" >
+              <img src="/picture.png" alt="Photo" className="rounded-img"/>
               <h1 style={{color: "red", backgroundColor: "yellow"}}> Olga </h1>
               <p>Hello word</p>
-              <a href="https://propokot.ru/" rel="noreferrer" target="_blank" class="btn btn-primary">
-              <button style={{color: "yellow", backgroundColor: "grey"}}>like</button>
+              <a href="https://propokot.ru/" rel="noreferrer" target="_blank" >
+              <button style={{color: "yellow", backgroundColor: "grey"}} className="rounded-img">like</button>
               </a>
             </Box>
           </Container>
         </div>
+        
       </main>
     </>
   );
