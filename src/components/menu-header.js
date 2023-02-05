@@ -63,7 +63,7 @@ function MenuHeader(props) {
       >
         <MenuList>
           {props?.options?.map((x) => (
-            <MenuItem>
+            <MenuItem key={x.key} >
               <Link href={x.href} style={{ textDecoration: 'none', color: 'black' }}>
                 <Typography textAlign="center">{x.label}</Typography>
               </Link>
